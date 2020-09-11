@@ -7,20 +7,9 @@ const controller = require("./controller.js");
 
 const router = express.Router();
 
-router.post("/", function (req, res) {
+router.post("/suscribed", function (req, res) {
   controller
-    .addLead(req.body)
-    .then((data) => {
-      response.success(req, res, data, 200);
-    })
-    .catch((error) => {
-      response.error(req, res, error, 500, error);
-    });
-});
-
-router.post("/demo", function (req, res) {
-  controller
-    .addDemoReq(req.body)
+    .newSuscribed(req.body)
     .then((data) => {
       response.success(req, res, data, 200);
     })
