@@ -11,10 +11,10 @@ router.post("/suscribed", function (req, res) {
   controller
     .newSuscribed(req.body)
     .then((data) => {
-      response.success(req, res, data, 200);
+      return response.success(req, res, data, 200);
     })
     .catch((error) => {
-      response.error(req, res, error, 500, error);
+      return response.error(req, res, error, 500, error);
     });
 });
 

@@ -5,8 +5,8 @@ const store = require("./store.js");
 
 function addLead(Lead) {
   return new Promise((resolve, reject) => {
-    if (!Lead || Lead.date == undefined) {
-      return reject("Invalid data");
+    if (!Lead || Lead.date === undefined) {
+      return reject(new Error("Invalid data"));
     }
     store.addLead(Lead);
     resolve("Se guardó correctamente");
@@ -16,7 +16,7 @@ function addLead(Lead) {
 function addDemoReq(DemoReq) {
   return new Promise((resolve, reject) => {
     if (!DemoReq || DemoReq.email === undefined) {
-      return reject("Invalid data");
+      return reject(new Error("Invalid data"));
     }
     store.addDemoReq(DemoReq);
     resolve("Se solicitó correctamente");

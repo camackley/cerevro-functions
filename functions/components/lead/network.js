@@ -11,10 +11,10 @@ router.post("/", function (req, res) {
   controller
     .addLead(req.body)
     .then((data) => {
-      response.success(req, res, data, 200);
+      return response.success(req, res, data, 200);
     })
     .catch((error) => {
-      response.error(req, res, error, 500, error);
+      return response.error(req, res, error, 500, error);
     });
 });
 
@@ -22,10 +22,10 @@ router.post("/demo", function (req, res) {
   controller
     .addDemoReq(req.body)
     .then((data) => {
-      response.success(req, res, data, 200);
+      return response.success(req, res, data, 200);
     })
     .catch((error) => {
-      response.error(req, res, error, 500, error);
+      return response.error(req, res, error, 500, error);
     });
 });
 
