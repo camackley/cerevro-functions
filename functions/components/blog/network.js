@@ -14,7 +14,18 @@ router.post("/suscribed", function (req, res) {
       return response.success(req, res, data, 200);
     })
     .catch((error) => {
-      return response.error(req, res, error, 500, error);
+      return response.error(req, res, "Internal Server Error", 500, error);
+    });
+});
+
+router.get("/trending", function (req, res) {
+  controller
+    .getTrendingPosts()
+    .then((data) => {
+      return response.success(req, res, data, 200);
+    })
+    .catch((error) => {
+      return response.error(req, res, "Internal Server Error", 500, error);
     });
 });
 

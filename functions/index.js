@@ -14,3 +14,5 @@ router(app);
 app.use("/app", express.static("public/index.html"));
 
 exports.api = functions.https.onRequest(app);
+
+//firebase emulators:start --only functions

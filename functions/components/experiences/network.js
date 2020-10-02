@@ -7,9 +7,9 @@ const controller = require("./controller.js");
 
 const router = express.Router();
 
-router.post("/", function (req, res) {
+router.post("/getUser", function (req, res) {
   controller
-    .addLead(req.body)
+    .getUser(req.body)
     .then((data) => {
       return response.success(req, res, data, 200);
     })
@@ -18,9 +18,9 @@ router.post("/", function (req, res) {
     });
 });
 
-router.post("/demo", function (req, res) {
+router.post("/newHistory", function (req, res) {
   controller
-    .addDemoReq(req.body)
+    .setHistory(req.body)
     .then((data) => {
       return response.success(req, res, data, 200);
     })
