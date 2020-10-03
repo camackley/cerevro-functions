@@ -8,6 +8,23 @@ function saveSuscribed(suscribed) {
   _firebaseIntance.ref("suscribed").push(suscribed);
 }
 
+function getPost(uid) {
+  return new Promise((resolve, reject) => {
+    db.collection("blog")
+      .doc(uid)
+      .get()
+      .then((snapshot) => {
+        if (snapshot.data() === undefined) {
+          return reject(new Error("Blog no encontrado"));
+        }
+        return resolve(snapshot.data());
+      })
+      .catch((error) => {
+        return reject(error);
+      });
+  });
+}
+
 function getTrendingPosts() {
   return new Promise((resolve, reject) => {
     db.collection("blog")
@@ -24,7 +41,7 @@ function getTrendingPosts() {
 }
 
 function getAuthor(authorId) {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     db.collection("authors")
       .doc(authorId)
       .get()
@@ -41,4 +58,5 @@ module.exports = {
   saveSuscribed,
   getTrendingPosts,
   getAuthor,
+  getPost,
 };
