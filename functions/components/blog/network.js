@@ -18,17 +18,6 @@ router.post("/suscribed", function (req, res) {
     });
 });
 
-router.get("/:uid", function (req, res) {
-  controller
-    .getPost(req.params.uid)
-    .then((data) => {
-      return response.success(req, res, data, 200);
-    })
-    .catch((error) => {
-      return response.error(req, res, error.message, 404, error);
-    });
-});
-
 router.get("/trending", function (req, res) {
   controller
     .getTrendingPosts()
@@ -37,6 +26,17 @@ router.get("/trending", function (req, res) {
     })
     .catch((error) => {
       return response.error(req, res, "Internal Server Error", 500, error);
+    });
+});
+
+router.get("/:uid", function (req, res) {
+  controller
+    .getPost(req.params.uid)
+    .then((data) => {
+      return response.success(req, res, data, 200);
+    })
+    .catch((error) => {
+      return response.error(req, res, error.message, 404, error);
     });
 });
 
