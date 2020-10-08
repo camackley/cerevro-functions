@@ -52,7 +52,18 @@ function getPost(uid) {
     store
       .getPost(uid)
       .then((data) => {
-        return resolve(data);
+        store
+          .getAuthor(data.author)
+          .then((author) => {
+            response = {
+              data: data,
+              author: author,
+            };
+            return resolve(response);
+          })
+          .catch((error) => {
+            return reject(error);
+          });
       })
       .catch((err) => {
         return reject(err);

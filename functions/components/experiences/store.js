@@ -21,6 +21,21 @@ function getUser(user) {
   });
 }
 
+function getQuiz(uid) {
+  return new Promise((resolve, reject) => {
+    db.collection("experiences")
+      .doc(uid)
+      .collection("quiz")
+      .get()
+      .then((snapshot) => {
+        return resolve(snapshot);
+      })
+      .catch((err) => {
+        return reject(err);
+      });
+  });
+}
+
 function setHistory(history) {
   db.collection("students")
     .doc(history.token)
@@ -31,4 +46,5 @@ function setHistory(history) {
 module.exports = {
   getUser,
   setHistory,
+  getQuiz,
 };

@@ -18,6 +18,17 @@ router.post("/getUser", function (req, res) {
     });
 });
 
+router.get("/getQuiz/:uid", function (req, res) {
+  controller
+    .getQuiz(req.params.uid)
+    .then((data) => {
+      return response.success(req, res, data, 200);
+    })
+    .catch((error) => {
+      return response.error(req, res, "Internal Server Error", 500, error);
+    });
+});
+
 router.post("/newHistory", function (req, res) {
   controller
     .setHistory(req.body)

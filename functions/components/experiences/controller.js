@@ -19,7 +19,27 @@ function setHistory(history) {
   });
 }
 
+function getQuiz(uid) {
+  return new Promise((resolve, reject) => {
+    store
+      .getQuiz(uid)
+      .then((data) => {
+        questions = [];
+        data.forEach((item) => {
+          questions.push(item.data());
+          if (data._size == questions.length) {
+            return resolve(questions);
+          }
+        });
+      })
+      .catch((err) => {
+        return reject(err);
+      });
+  });
+}
+
 module.exports = {
   getUser,
   setHistory,
+  getQuiz,
 };
