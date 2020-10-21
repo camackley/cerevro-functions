@@ -27,7 +27,7 @@ function getQuiz(uid) {
         questions = [];
         data.forEach((item) => {
           questions.push(item.data());
-          if (data._size == questions.length) {
+          if (data._size === questions.length) {
             return resolve(questions);
           }
         });

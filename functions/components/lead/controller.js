@@ -9,6 +9,7 @@ function addLead(Lead) {
       return reject(new Error("Invalid data"));
     }
     store.addLead(Lead);
+    store.addHubspotContact(Lead);
     resolve("Se guardó correctamente");
   });
 }
