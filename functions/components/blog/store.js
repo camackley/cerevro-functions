@@ -40,6 +40,21 @@ function getTrendingPosts() {
   });
 }
 
+function getRelatedPosts(tag) {
+  return new Promise((resolve, reject) => {
+    db.collection("blog")
+      .where("principal_tag", "==", tag)
+      .limit(10)
+      .get()
+      .then((snapshot) => {
+        return resolve(snapshot);
+      })
+      .catch((err) => {
+        return reject(err);
+      });
+  });
+}
+
 function getAuthor(authorId) {
   return new Promise((resolve, reject) => {
     db.collection("authors")
@@ -59,4 +74,5 @@ module.exports = {
   getTrendingPosts,
   getAuthor,
   getPost,
+  getRelatedPosts,
 };

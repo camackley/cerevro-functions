@@ -43,6 +43,37 @@ function getTrendingPosts() {
   });
 }
 
+function getRelatedPosts(tag) {
+  return new Promise((resolve, reject) => {
+    posts = [];
+    store
+      .getRelatedPosts(tag)
+      .then((data) => {
+        data.forEach(async (doc) => {
+          store
+            .getAuthor(doc.data().author)
+            .then((author) => {
+              post = {
+                id: doc.id,
+                author: author,
+                data: doc.data(),
+              };
+              posts.push(post);
+              if (data._size === posts.length) {
+                return resolve(posts);
+              }
+            })
+            .catch((error) => {
+              return reject(error);
+            });
+        });
+      })
+      .catch((err) => {
+        return reject(err);
+      });
+  });
+}
+
 function getPost(uid) {
   return new Promise((resolve, reject) => {
     uid = encodeURI(uid);
@@ -75,4 +106,5 @@ module.exports = {
   newSuscribed,
   getTrendingPosts,
   getPost,
+  getRelatedPosts,
 };

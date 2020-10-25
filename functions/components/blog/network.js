@@ -29,6 +29,17 @@ router.get("/trending", function (req, res) {
     });
 });
 
+router.get("/related/:tag", function (req, res) {
+  controller
+    .getRelatedPosts(req.params.tag)
+    .then((data) => {
+      return response.success(req, res, data, 200);
+    })
+    .catch((error) => {
+      return response.error(req, res, error.message, 404, error);
+    });
+});
+
 router.get("/:uid", function (req, res) {
   controller
     .getPost(req.params.uid)
