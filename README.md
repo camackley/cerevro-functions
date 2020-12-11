@@ -11,7 +11,7 @@ __________
   - [Ambientes](#ambientes)
     - [Comenzar servidor de pruebas](#comenzar-servidor-de-pruebas)
     - [Desplegar servicio Web](#desplegar-servicio-web)
-      - [Despliegue pruebas : alias **staging**](#despliegue-pruebas--alias-staging)
+      - [Despliegue pruebas : alias **dev**](#despliegue-pruebas--alias-dev)
       - [Despliegue producción : alias **prod**](#despliegue-producción--alias-prod)
     - [Url servicios Web](#url-servicios-web)
 
@@ -40,16 +40,16 @@ Depende del ambiente al cual se quiera deplegar
     firebase deploy --only functions:[ALIAS]
 
 - **ALIAS**:
-  - staging : Servicio que se conecta a **BD** de pruebas
+  - dev : Servicio que se conecta a **BD** de pruebas
   - api : Servicio ejecutado para ambiente productivo
 
-#### Despliegue pruebas : alias **staging**
+#### Despliegue pruebas : alias **dev**
 
 1) Asegurar que la variable **EXECUTE_PROFILE** en el archivo [config.js](./functions/config.js) sea **dev**
 2) Añadir los cambios a git y enviarlos a la rama de desarrollo
 3) Ejecutar
 
-        firebase deploy --only functions:staging
+        firebase deploy --only functions:dev
 
 #### Despliegue producción : alias **prod**
 
@@ -68,7 +68,7 @@ Depende del ambiente al cual se quiera deplegar
 
 2) URL servicio de pruebas
 
-        https://us-central1-cerevro-cf50f.cloudfunctions.net/staging/
+        https://us-central1-cerevro-cf50f.cloudfunctions.net/dev/
 
 3) URL servicio en desarrollos
 
