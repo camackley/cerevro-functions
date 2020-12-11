@@ -7,9 +7,18 @@ function addLead(Lead) {
     if (!Lead || Lead.date === undefined) {
       return reject(new Error("Invalid data"));
     }
-    store.addLead(Lead);
-    store.addHubspotContact(Lead);
-    resolve("Se guardó correctamente");
+    store.addLead(Lead).catch((err) => {
+      return reject(new Error(err.messages));
+    });
+    store
+      .addHubspotContact(Lead)
+      .then(() => {
+        return resolve("Se guardó correctamente");
+      })
+      .catch((err) => {
+        console.log("Error");
+        return reject(err);
+      });
   });
 }
 

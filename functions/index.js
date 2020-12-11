@@ -29,6 +29,6 @@ app.use(cors({ origin: true }));
 router(app);
 app.use("/app", express.static("public/index.html"));
 
+exports.api = functions.https.onRequest(app);
+exports.staging = functions.https.onRequest(app);
 exports.dev = functions.https.onRequest(app);
-
-//firebase emulators:start --only functions

@@ -7,9 +7,18 @@ function addCommisionAgent(CommisionAgent) {
     if (!CommisionAgent || CommisionAgent.date === undefined) {
       return reject(new Error("Invalid data"));
     }
-    store.addHubspotCommisionAgent(CommisionAgent);
-    store.addCommisionAgent(CommisionAgent);
-    resolve("Se guardó correctamente");
+    store.addCommisionAgent(CommisionAgent).catch((err) => {
+      return reject(new Error(err.messages));
+    });
+    store
+      .addHubspotCommisionAgent(CommisionAgent)
+      .then(() => {
+        return resolve("Se guardó correctamente");
+      })
+      .catch((err) => {
+        console.log("Error");
+        return reject(err);
+      });
   });
 }
 
