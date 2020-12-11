@@ -1,12 +1,12 @@
 const Hubspot = require("hubspot");
-
 const functions = require("firebase-functions");
 const firebase_admin = require("firebase-admin");
+const { Config } = require("../../config.js");
 
 const _firebaseIntance = firebase_admin.database();
-const db = firebase_admin.firestore();
 
 function addHubspotCommisionAgent(CommisionAgent) {
+  var config = new Config();
   var data = {
     submittedAt: CommisionAgent.date,
     fields: [
@@ -34,11 +34,12 @@ function addHubspotCommisionAgent(CommisionAgent) {
   };
 
   const hubspot = new Hubspot({
-    apiKey: "1dd3bc29-6e92-4976-99d4-7c8a0f07d8c3",
+    apiKey: config.get_hubspot_key(),
     checkLimit: false,
   });
 
-  hubspot.forms.submit("8663531", "8975b95a-01e3-4169-bb59-27193979bbcf", data);
+  form_info = config.get_hubsport_form_info("lead");
+  hubspot.forms.submit(form_info.formId, form_info.portalId, data);
 }
 
 function addCommisionAgent(CommisionAgent) {

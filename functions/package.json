@@ -10,7 +10,7 @@
     "logs": "firebase functions:log"
   },
   "engines": {
-    "node": "10"
+    "node": "8"
   },
   "dependencies": {
     "admin": "^1.4.1",
@@ -22,7 +22,7 @@
     "firebase-functions": "^3.6.1",
     "hubspot": "^2.3.13",
     "request": "^2.88.2",
-    "twilio": "^3.49.1"
+    "xml2js": "^0.4.23"
   },
   "devDependencies": {
     "eslint": "^5.12.0",

@@ -1,6 +1,4 @@
 const request = require("request");
-const client = require("twilio");
-
 const store = require("./store.js");
 
 function getScore(user) {

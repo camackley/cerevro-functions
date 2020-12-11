@@ -1,12 +1,13 @@
 const Hubspot = require("hubspot");
+
 const functions = require("firebase-functions");
 const firebase_admin = require("firebase-admin");
-
-firebase_admin.initializeApp(functions.config().firebase);
+const { Config } = require("../../config.js");
 
 const _firebaseIntance = firebase_admin.database();
 
 function addHubspotContact(lead) {
+  var config = new Config();
   var data = {
     submittedAt: lead.date,
     fields: [
@@ -42,11 +43,11 @@ function addHubspotContact(lead) {
   };
 
   const hubspot = new Hubspot({
-    apiKey: "1dd3bc29-6e92-4976-99d4-7c8a0f07d8c3",
+    apiKey: config.get_hubspot_key(),
     checkLimit: false,
   });
-
-  hubspot.forms.submit("8663531", "ebfb40b0-66ef-4a9c-86ba-9ef37ae84879", data);
+  form_info = config.get_hubsport_form_info("lead");
+  hubspot.forms.submit(form_info.formId, form_info.portalId, data);
 }
 
 function addLead(lead) {
