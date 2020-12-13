@@ -16,7 +16,6 @@ function addLead(Lead) {
         return resolve("Se guardó correctamente");
       })
       .catch((err) => {
-        console.log("Error");
         return reject(err);
       });
   });

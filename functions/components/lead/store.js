@@ -17,10 +17,6 @@ function addHubspotContact(lead) {
           value: lead.name,
         },
         {
-          name: "lastname",
-          value: lead.lastname,
-        },
-        {
           name: "country",
           value: lead.country,
         },
@@ -31,10 +27,6 @@ function addHubspotContact(lead) {
         {
           name: "email",
           value: lead.email,
-        },
-        {
-          name: "message",
-          value: lead.observations,
         },
       ],
       context: {
