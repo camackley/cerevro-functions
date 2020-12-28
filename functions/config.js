@@ -1,6 +1,6 @@
 // ****************************************************************\\
 const EXECUTE_PROFILE = "dev";
-//const EXECUTE_PROFILE = "prod"
+//const EXECUTE_PROFILE = "prod";
 // ****************************************************************\\
 
 var config_profiles = {
