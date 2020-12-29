@@ -5,7 +5,7 @@ const { Config } = require("../../config.js");
 
 const _firebaseIntance = firebase_admin.database();
 
-function addHubspotCommisionAgent(CommisionAgent) {
+function addHubspotCommisionAgent(CommisionAgent, uid) {
   return new Promise((resolve, reject) => {
     var config = new Config();
     var data = {
@@ -27,6 +27,10 @@ function addHubspotCommisionAgent(CommisionAgent) {
           name: "country",
           value: CommisionAgent.country,
         },
+        {
+          name: "uid",
+          value: uid,
+        },
       ],
       context: {
         pageUri: "www.cerevro.com/comisinistas",
@@ -39,13 +43,14 @@ function addHubspotCommisionAgent(CommisionAgent) {
       checkLimit: false,
     });
 
-    form_info = config.get_hubsport_form_info("commision");
+    form_info = config.get_hubspot_form_info("commision");
     hubspot.forms
       .submit(form_info.formId, form_info.portalId, data)
       .then((data) => {
         return resolve(data);
       })
       .catch((err) => {
+        console.log(err.message);
         return reject(err);
       });
   });

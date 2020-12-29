@@ -26,6 +26,10 @@ var config_profiles = {
         formId: "8993210",
         portalId: "4975f128-10ec-43fc-82cc-210cd397038e",
       },
+      demo: {
+        formId: "8993210",
+        portalId: "295eb56b-8341-4212-827f-fd16ba4d763e",
+      },
     },
   },
   prod: {
@@ -59,7 +63,7 @@ exports.Config = function () {
     return config.firebase_config;
   };
 
-  this.get_hubsport_form_info = function (form_name) {
+  this.get_hubspot_form_info = function (form_name) {
     return config.forms[form_name];
   };
 };

@@ -28,6 +28,7 @@ app.use(cors({ origin: true }));
 
 router(app);
 app.use("/app", express.static("public/index.html"));
+app.use("/privacidad", express.static("public/privacidad.html"));
 
 exports.api = functions.https.onRequest(app);
 exports.dev = functions.https.onRequest(app);
