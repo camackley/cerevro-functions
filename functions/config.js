@@ -1,6 +1,6 @@
 // ****************************************************************\\
-const EXECUTE_PROFILE = "dev";
-/* const EXECUTE_PROFILE = "prod"; */
+//const EXECUTE_PROFILE = "dev";
+const EXECUTE_PROFILE = "prod";
 // ****************************************************************\\
 
 var config_profiles = {
@@ -43,6 +43,10 @@ var config_profiles = {
       commision: {
         formId: "8663531",
         portalId: "8975b95a-01e3-4169-bb59-27193979bbcf",
+      },
+      demo: {
+        formId: "8663531",
+        portalId: "3a7e067a-02c0-4cbe-ad77-9eb2d394fbec",
       },
     },
   },
