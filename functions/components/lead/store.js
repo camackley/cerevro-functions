@@ -5,8 +5,8 @@ const { Config } = require("../../config.js");
 
 const _firebaseIntance = firebase_admin.database();
 
-function addHubspotContact(lead, uid) {
-  return new Promise((resolve, reject) => {
+const addHubspotContact = async (lead, uid) => {
+  try {
     var config = new Config();
     var data = {
       submittedAt: lead.date,
@@ -42,36 +42,31 @@ function addHubspotContact(lead, uid) {
       checkLimit: false,
     });
     form_info = config.get_hubspot_form_info("lead");
-    hubspot.forms
-      .submit(form_info.formId, form_info.portalId, data)
-      .then((data) => {
-        return resolve(data);
-      })
-      .catch((err) => {
-        return reject(err);
-      });
-  });
-}
+    const hubspotData = await hubspot.forms.submit(
+      form_info.formId,
+      form_info.portalId,
+      data
+    );
+    return hubspotData;
+  } catch (error) {
+    return error;
+  }
+};
 
-function addLead(lead) {
-  return new Promise((resolve, reject) => {
-    _firebaseIntance
-      .ref("leads")
-      .push(lead)
-      .then((data) => {
-        _firebaseIntance
-          .ref("suscribed")
-          .push({ email: lead.email, date: lead.date });
-        resolve(data);
-      })
-      .catch((err) => {
-        reject(err);
-      });
-  });
-}
+const addLead = async (lead) => {
+  try {
+    const userData = await _firebaseIntance.ref("leads").push(lead);
+    await _firebaseIntance
+      .ref("suscribed")
+      .push({ email: lead.email, date: lead.date });
+    return userData;
+  } catch (error) {
+    return error;
+  }
+};
 
-function addHubspotDemoReq(lead, uid) {
-  return new Promise((resolve, reject) => {
+const addHubspotDemoReq = async (lead, uid) => {
+  try {
     var config = new Config();
     var data = {
       submittedAt: lead.date,
@@ -111,34 +106,24 @@ function addHubspotDemoReq(lead, uid) {
       checkLimit: false,
     });
     form_info = config.get_hubspot_form_info("demo");
-    hubspot.forms
-      .submit(form_info.formId, form_info.portalId, data)
-      .then((data) => {
-        return resolve(data);
-      })
-      .catch((err) => {
-        console.log(err.message);
-        return reject(err);
-      });
-  });
-}
+    const hubspotData = await hubspot.forms.submit(
+      form_info.formId,
+      form_info.portalId,
+      data
+    );
+    return hubspotData;
+  } catch (error) {
+    return err;
+  }
+};
 
-function addDemoReq(demoReq) {
-  return new Promise((resolve, reject) => {
-    _firebaseIntance
-      .ref("demo")
-      .push(demoReq)
-      .then((data) => {
-        _firebaseIntance
-          .ref("suscribed")
-          .push({ email: demoReq.email, date: demoReq.date });
-        resolve(data);
-      })
-      .catch((err) => {
-        reject(err);
-      });
-  });
-}
+const addDemoReq = async (demoReq) => {
+  const userData = await _firebaseIntance.ref("demo").push(demoReq);
+  await _firebaseIntance
+    .ref("suscribed")
+    .push({ email: demoReq.email, date: demoReq.date });
+  return userData;
+};
 
 module.exports = {
   addLead,
