@@ -5,8 +5,8 @@ const { Config } = require("../../config.js");
 
 const _firebaseIntance = firebase_admin.database();
 
-function addHubspotCommisionAgent(CommisionAgent) {
-  return new Promise((resolve, reject) => {
+const addHubspotCommisionAgent = async (CommisionAgent, uid) => {
+  try {
     var config = new Config();
     var data = {
       submittedAt: CommisionAgent.date,
@@ -27,6 +27,10 @@ function addHubspotCommisionAgent(CommisionAgent) {
           name: "country",
           value: CommisionAgent.country,
         },
+        {
+          name: "uid",
+          value: uid,
+        },
       ],
       context: {
         pageUri: "www.cerevro.com/comisinistas",
@@ -39,31 +43,28 @@ function addHubspotCommisionAgent(CommisionAgent) {
       checkLimit: false,
     });
 
-    form_info = config.get_hubsport_form_info("commision");
-    hubspot.forms
-      .submit(form_info.formId, form_info.portalId, data)
-      .then((data) => {
-        return resolve(data);
-      })
-      .catch((err) => {
-        return reject(err);
-      });
-  });
-}
+    form_info = config.get_hubspot_form_info("commision");
+    hubspotData = hubspot.forms.submit(
+      form_info.formId,
+      form_info.portalId,
+      data
+    );
+    return hubspotData;
+  } catch (error) {
+    return error;
+  }
+};
 
-function addCommisionAgent(CommisionAgent) {
-  return new Promise((resolve, reject) => {
-    _firebaseIntance
+const addCommisionAgent = async (CommisionAgent) => {
+  try {
+    const userData = await _firebaseIntance
       .ref("CommisionAgent")
-      .push(CommisionAgent)
-      .then((data) => {
-        return resolve(data);
-      })
-      .catch((err) => {
-        return reject(err);
-      });
-  });
-}
+      .push(CommisionAgent);
+    return userData;
+  } catch (error) {
+    return error;
+  }
+};
 
 module.exports = {
   addCommisionAgent,
