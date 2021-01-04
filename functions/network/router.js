@@ -3,6 +3,7 @@ const blog = require("../components/blog/network.js");
 const experiences = require("../components/experiences/network.js");
 const user = require("../components/user/network.js");
 const commision = require("../components/commision/network.js");
+const intranet = require("../components/intranet/network.js");
 
 const router = function (server) {
   server.use("/lead", lead);
@@ -10,6 +11,7 @@ const router = function (server) {
   server.use("/experiences", experiences);
   server.use("/user", user);
   server.use("/commision", commision);
+  server.use("/intranet", intranet);
 };
 
 module.exports = router;
